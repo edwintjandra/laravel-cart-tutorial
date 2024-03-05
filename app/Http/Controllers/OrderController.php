@@ -12,10 +12,17 @@ class OrderController extends Controller
 {
     //
     public function index(){
+        $orders=Order::where('user_id',Auth::user()->id)->get();
         //cari orders yang where order user_id = Auth::user()->id
         //di dalem file order blade php, bikin show order detail.
         //$order->orderItem , buat nampilin semua daftar orderItem di order  
-        return view('order.index');
+        return view('order.index',compact('orders'));
+    }
+
+    public function show($id){
+        $order=Order::find($id);
+
+        return view('order.show',compact('order'));
     }
 
     public function create(){

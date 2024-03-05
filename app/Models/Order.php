@@ -14,4 +14,9 @@ class Order extends Model
         'address',
         'status'
     ];
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

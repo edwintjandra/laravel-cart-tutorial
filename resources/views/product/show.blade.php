@@ -7,6 +7,9 @@
     <title>Document</title>
 </head>
 <body>
+    @if (Session::has('failed'))
+    <h1 style="color:red">{{ Session::get('failed') }}</h1>
+    @endif
     <h1>{{ $product->name }}</h1>
     <p>price: {{ $product->price }}</p>
     <p>description: {{ $product->description }} </p>

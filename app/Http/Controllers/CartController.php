@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
 
 
 class CartController extends Controller
@@ -16,6 +17,14 @@ class CartController extends Controller
     }
 
     public function addToCart(Request $request){
+        //kalo misalkan quantity yang user tambah itu lebih besar dari stock, kita return 
+        //redirect terus kasih error message , kalo gaada stock;
+        $product=Product::find($request->product_id);
+        if($request->quantity > $product->stock){
+            return redirect()->route('product.show',$product->slug)->with('failed', 'stock is not enough');   
+        }
+
+
         //kalo user uda pernah add cart product sebelumnya, tinggal tambah quantity aja.
         $carts=Cart::where('user_id',Auth::user()->id)->get();
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug');
             $table->integer('price');
             $table->text('description');
+            $table->integer('stock')->default(1);
             //ini tambahin buat stock barangnya
             $table->timestamps();
         });
